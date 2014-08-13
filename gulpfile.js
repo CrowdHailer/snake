@@ -4,6 +4,7 @@ var connect = require('gulp-connect');
 var merge = require('merge-stream');
 var jslint = require('gulp-jslint');
 var extend = require('xtend');
+var size = require('gulp-size');
 
 gulp.task('buildTest', function () {
     var js = gulp.src('test/index.js')
@@ -30,10 +31,10 @@ gulp.task('watch', function () {
 
 gulp.task('lint', function () {
     var lintSettings = require('./.jslint.json');
-    gulp.src(['src/*.js'])
+    var source = gulp.src(['src/*.js'])
         .pipe(jslint(lintSettings));
 
-    gulp.src(['test/**/*.js', '!test/bower_components/**/*'])
+    var tests = gulp.src(['test/**/*.js', '!test/bower_components/**/*'])
         .pipe(jslint(extend(lintSettings, {
             predef: [
                 'jasmine',
@@ -46,6 +47,9 @@ gulp.task('lint', function () {
                 'xit'
             ]
         })));
+
+    return merge(source, tests)
+        .pipe(size());
 });
 
 gulp.task('test', ['buildTest', 'serve', 'watch']);
