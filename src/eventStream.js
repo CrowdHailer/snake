@@ -6,7 +6,7 @@ exports.create = function (options) {
     options = options || {};
     subscribers = [];
     value = options.startValue;
-    
+
     prototype = {
         subscribe: function (subscriber) {
             subscribers.push(subscriber);

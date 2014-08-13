@@ -29,9 +29,7 @@ gulp.task('watch', function () {
 
 gulp.task('lint', function () {
     return gulp.src(['src/*.js'])
-        .pipe(jslint({
-            node: true
-        }));
+        .pipe(jslint(require('./.jslint.json')));
 });
 
 gulp.task('test', ['buildTest', 'serve', 'watch']);
