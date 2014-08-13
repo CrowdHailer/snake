@@ -16,6 +16,7 @@
     "merge-stream": "^0.1.5",
     "jshint": "^2.5.3",
     "jshint-stylish": "^0.4.0",
-    "gulp-jslint": "^0.1.6"
+    "gulp-jslint": "^0.1.6",
+    "xtend": "^4.0.0"
   }
 }
