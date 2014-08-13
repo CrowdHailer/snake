@@ -38,4 +38,17 @@ describe('Creating a generic event Stream', function () {
         stream.subscribe(dummy);
         expect(dummy).toHaveBeenCalledWith(DATA);
     });
+
+    it('should have multiple subscribers', function () {
+       var stream = eventStream.create();
+        var dummy = jasmine.createSpy('dummy');
+        var dummy2 = jasmine.createSpy('dummy2');
+        var DATA = {};
+        stream.subscribe(dummy);
+        stream.subscribe(dummy2);
+        stream.push(DATA);
+        expect(dummy).toHaveBeenCalledWith(DATA); 
+        expect(dummy2).toHaveBeenCalledWith(DATA); 
+    });
 });
+

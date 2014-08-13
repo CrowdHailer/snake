@@ -1,16 +1,20 @@
 exports.create = function (options) {
     options = options || {};
-    var subscriber;
+    var subscribers = [];
     var value = options.startValue;
 
     prototype = {
-        subscribe: function (newSubscriber) {
-            subscriber = newSubscriber;
+        subscribe: function (subscriber) {
+            subscribers.push(subscriber);
             subscriber(value);
         }, 
         push: function (data) {
             value = data;
-            if (subscriber) subscriber(value);
+            if (subscribers.length) {
+                subscribers.forEach(function (subscriber) {
+                    subscriber(data);
+                });
+            }
         }
     };
 
