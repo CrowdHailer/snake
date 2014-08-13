@@ -1,8 +1,12 @@
 exports.create = function (options) {
-    options = options || {};
-    var subscribers = [];
-    var value = options.startValue;
+    'use strict';
 
+    var subscribers, value, prototype;
+
+    options = options || {};
+    subscribers = [];
+    value = options.startValue;
+    
     prototype = {
         subscribe: function (subscriber) {
             subscribers.push(subscriber);
@@ -13,7 +17,7 @@ exports.create = function (options) {
                     subscribers.splice(index, 1);
                 }
             };
-        }, 
+        },
         push: function (data) {
             value = data;
             if (subscribers.length) {
