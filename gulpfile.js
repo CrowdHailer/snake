@@ -8,7 +8,6 @@ gulp.task('buildTest', function () {
         .pipe(browserify());
 
     var html = gulp.src('test/index.html');
-    console.log('building');
 
     merge(html, js)
         .pipe(gulp.dest('./tmp/'))
@@ -24,7 +23,7 @@ gulp.task('serve', function () {
 });
 
 gulp.task('watch', function () {
-    gulp.watch(['./test/**/*'], ['buildTest']);
+    gulp.watch(['./test/**/*', './src/**/*'], ['buildTest']);
 });
 
 gulp.task('test', ['buildTest', 'serve', 'watch']);
