@@ -1,0 +1,1 @@
+require('./spec/eventStream_spec.js');
