@@ -7,8 +7,9 @@ var extend = require('xtend');
 var size = require('gulp-size');
 
 gulp.task('build', function () {
-    return gulp.src('src/stream.js')
+    return gulp.src('src/browser.js')
         .pipe(browserify())
+        .pipe(size())
         .pipe(gulp.dest('./dist'))
 })
 
