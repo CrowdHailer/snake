@@ -47,4 +47,12 @@ describe('Each', function () {
             expect(dummy).not.toHaveBeenCalled();
         })
     })
+
+    describe('curried', function () {
+        it('should take arguments in a curried fashion', function () {
+            var array = [4, 2]
+            each(dummy)(array);
+            expect(dummy.calls.allArgs()).toEqual([[4, 0, array], [2, 1, array]]);
+        })
+    });
 });
