@@ -1,33 +1,30 @@
 'use strict';
 
 Object.prototype.map = function (action, context) {
-    var result = {};
-    var obj = this;
-    for (var key in obj) {
-        if(obj.hasOwnProperty(key)) {
-            result[key] = action.call(context, obj[key], key, obj)
+    var key, result = {}, obj = this;
+    for (key in obj) {
+        if (obj.hasOwnProperty(key)) {
+            result[key] = action.call(context, obj[key], key, obj);
         }
     }
-    return result
-}
+    return result;
+};
 
 String.prototype.map = function (action, context) {
-    var result = '';
-    var str = this;
-    for (var key in str) {
-        if(str.hasOwnProperty(key)) {
-            result = result + action.call(context, str[key], parseInt(key), str)
+    var key, result = '', str = this;
+    for (key in str) {
+        if (str.hasOwnProperty(key)) {
+            result = result + action.call(context, str[key], parseInt(key, 10), str);
         }
     }
-    return result
-}
+    return result;
+};
 
 module.exports = function (action, collection) {
     if (arguments.length === 2) {
-        return collection.map(action, this)
-    } else {
-        return function (collection) {
-            return collection.map(action, this  )
-        };
+        return collection.map(action, this);
     }
+    return function (collection) {
+        return collection.map(action, this);
+    };
 };
