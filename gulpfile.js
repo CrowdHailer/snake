@@ -5,11 +5,14 @@ var merge = require('merge-stream');
 var jslint = require('gulp-jslint');
 var extend = require('xtend');
 var size = require('gulp-size');
+var uglify = require('gulp-uglify');
 
 gulp.task('build', function () {
     return gulp.src('src/browser.js')
         .pipe(browserify())
         .pipe(size())
+        // .pipe(uglify())
+        // .pipe(size())
         .pipe(gulp.dest('./dist'))
 })
 
