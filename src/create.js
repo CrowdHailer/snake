@@ -9,7 +9,7 @@ var each = require('./each');
 var create = function () {
     'use strict';
 
-    var subscribers, current, proto, NOEVENT;
+    var subscribers, current, proto, NOEVENT, instance;
     NOEVENT = {};
     current = NOEVENT;
     subscribers = [];
@@ -17,14 +17,14 @@ var create = function () {
     proto = {
         map: function (transfiguration) {
             var spawned = create();
-            this.forEach(function(data){
-                spawned.launch(transfiguration(data))
-            })
-            return spawned
+            this.forEach(function (data) {
+                spawned.launch(transfiguration(data));
+            });
+            return spawned;
         }
-    }
+    };
 
-    var instance = Object.create(proto);
+    instance = Object.create(proto);
     instance.launch = function (item) {
         current = item;
         each(function (subscriber) {
