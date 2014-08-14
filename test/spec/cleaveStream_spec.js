@@ -37,4 +37,21 @@ describe('Cleaving Stream', function () {
             expect(dummy).toHaveBeenCalledWith([2, 3]);
         });
     });
+    describe('tail method', function () {
+        it('should pass no events untill buffer full', function () {
+            var stream2 = stream1.tail(2);
+            stream2.forEach(dummy);
+            stream1.launch(1);
+            expect(dummy).not.toHaveBeenCalled();
+        });
+
+        it('should pass events to offshoot stream after buffer', function () {
+            var stream2 = stream1.tail(2);
+            stream2.forEach(dummy);
+            stream1.launch(1);
+            stream1.launch(2);
+            stream1.launch(3);
+            expect(dummy).toHaveBeenCalledWith(1);
+        });
+    });
 });

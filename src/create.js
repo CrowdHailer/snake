@@ -37,6 +37,17 @@ proto = {
             spawned.launch(slidingWindow)
         });
         return spawned;
+    },
+    tail: function (capacity) {
+        var spawned = create();
+        var buffer = [];
+        this.forEach(function (data) {
+            buffer.push(data);
+            if (buffer.length > capacity) {
+                spawned.launch(buffer.shift());
+            }
+        });
+        return spawned;
     }
 };
 
