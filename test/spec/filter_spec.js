@@ -21,4 +21,18 @@ describe('Filter', function () {
             expect(dummy.calls.allArgs()).toEqual([[-1, 0, array], [1, 1, array]]);
         });
     });
+
+    describe('for Objects', function () {
+        it('should filter passing values to a new array', function () {
+            var obj = {x: -1, y: 1};
+            result = filter(positive, obj);
+            expect(result).toEqual({y: 1});
+        });
+
+        it('should call the operation with every value and key in an object', function () {
+            var obj = {x: -1, y: 1};
+            filter(dummy, obj);
+            expect(dummy.calls.allArgs()).toEqual([[-1, 'x', obj], [1, 'y', obj]]);
+        });
+    });
 });
