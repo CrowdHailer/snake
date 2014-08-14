@@ -49,4 +49,12 @@ describe('Map', function () {
             expect(dummy.calls.allArgs()).toEqual([['a', 0, str], ['b', 1, str]]);
         });
     });
+
+    describe('General features', function () {
+        it('should take arguments in a curried fashion', function () {
+            var array = [4, 2];
+            result = map(dummy)(array);
+            expect(result).toEqual([1, 1]);
+        });
+    });
 });

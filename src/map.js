@@ -23,5 +23,11 @@ String.prototype.map = function (action) {
 }
 
 module.exports = function (action, collection) {
-    return collection.map(action)
-}
+    if (arguments.length === 2) {
+        return collection.map(action)
+    } else {
+        return function (collection) {
+            return collection.map(action   )
+        };
+    }
+};
