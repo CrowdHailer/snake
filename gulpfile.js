@@ -6,6 +6,12 @@ var jslint = require('gulp-jslint');
 var extend = require('xtend');
 var size = require('gulp-size');
 
+gulp.task('build', function () {
+    return gulp.src('src/stream.js')
+        .pipe(browserify())
+        .pipe(gulp.dest('./dist'))
+})
+
 gulp.task('buildTest', function () {
     var js = gulp.src('test/index.js')
         .pipe(browserify());
