@@ -10,9 +10,10 @@
     <script src="../dist/browser.js"></script>
     <script>
         var clicks = Stream.fromEvents('click', $('#button'));
-        console.log(clicks)
+
         var clientX = _.map(_.dot('clientX'), clicks);
         _.each(_.log, clientX);
+        
         var clientY = _.map(_.dot('clientY'), clicks);
         _.each(_.log, clientY);
 
