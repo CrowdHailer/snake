@@ -1,3 +1,7 @@
+// TODO ability to return stream to no event state
+// TODO timeout for events in stream
+// TODO Add function only once
+
 var each = require('./each');
 
 exports.create = function () {
@@ -21,6 +25,12 @@ exports.create = function () {
             subscribers.push(subscriber)
             if (current !== NOEVENT) {
                 subscriber(current)
+            }
+            return function () {
+                var index = subscribers.indexOf(subscriber);
+                if (index > -1) {
+                    subscribers.splice(index, 1);
+                }
             }
         }
     };

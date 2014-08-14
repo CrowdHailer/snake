@@ -32,5 +32,12 @@ describe('Stream', function () {
             stream.forEach(dummy);
             expect(dummy).toHaveBeenCalledWith(pebble);
         });
+
+        it('should return an unsubscribe function', function () {
+            var remove = stream.forEach(dummy);
+            remove();
+            stream.launch(pebble);
+            expect(dummy).not.toHaveBeenCalled();
+        });
     });
 });
