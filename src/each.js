@@ -4,8 +4,11 @@ Object.prototype.forEach = function (action) {
     for (key in obj) {
         console.log(key)
         if (obj.hasOwnProperty(key)) {
+            if (obj.length) {
+                key = parseInt(key)
+            }
             item = obj[key];
-            action.call(this, item, key)
+            action.call(this, item, key, obj)
         }
     }
 }
