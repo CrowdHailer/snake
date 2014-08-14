@@ -5,15 +5,15 @@ describe('Filter', function () {
 
     beforeEach(function () {
         filter = require('../../src/filter');
-        positive = function (n) { return n >= 0; }
+        positive = function (n) { return n >= 0; };
         dummy = jasmine.createSpy();
     });
 
     describe('for Arrays', function () {
         it('should filter an array', function () {
             var array = [-1, 1];
-            expect(filter(positive, array)).toEqual([1])
-        })
+            expect(filter(positive, array)).toEqual([1]);
+        });
 
         it('should call the action with element, index and array', function () {
             var array = [-1, 1];
@@ -41,7 +41,7 @@ describe('Filter', function () {
     describe('General features', function () {
         it('should take arguments curried', function () {
             var array = [-1, 1];
-            expect(filter(positive)(array)).toEqual([1])
+            expect(filter(positive)(array)).toEqual([1]);
         });
     });
 });
