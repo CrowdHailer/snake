@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <div id="button" style="height:200px;width:200px;background-color:red"></div>
+
+    <script src="../dist/browser.js"></script>
+    <script>
+        var log = console.log.bind(console);
+        var $ = document.querySelector.bind(document);
+
+        var clicks = Stream.fromEvents('click', $('#button'));
+        _.each(log, clicks);
+
+    </script>
+</body>
+</html>
