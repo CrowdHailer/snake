@@ -4,7 +4,7 @@ describe('From Events', function () {
     var Stream, dummy, each, $, sandbox, element, bean, pebble;
 
     beforeEach(function () {
-        Stream = require('../../src/fromEvents');
+        Stream = require('../../src/stream');
         each = require('../../src/each');
         dummy = jasmine.createSpy();
         $ = document.querySelector.bind(document);
