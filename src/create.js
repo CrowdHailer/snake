@@ -21,6 +21,15 @@ var create = function () {
                 spawned.launch(transfiguration(data));
             });
             return spawned;
+        },
+        filter: function (predicate) {
+            var spawned = create();
+            this.forEach(function (data) {
+                if (predicate(data)) {
+                    spawned.launch(data)
+                }
+            });
+            return spawned;
         }
     };
 
