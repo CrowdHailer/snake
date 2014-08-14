@@ -3,6 +3,7 @@
 // TODO Add function only once
 // TODO kill method to remove events and embeded listeners
 // TODO pause method to stop events emitting
+// TODO check spawned processes signup procedure
 'use strict';
 var each, proto, create;
 
@@ -22,6 +23,18 @@ proto = {
             if (predicate(data)) {
                 spawned.launch(data);
             }
+        });
+        return spawned;
+    },
+    take: function (capacity) {
+        var spawned = create();
+        var slidingWindow = [];
+        this.forEach(function (data) {
+            slidingWindow.push(data);
+            if (slidingWindow.length > capacity) {
+                slidingWindow.shift();
+            }
+            spawned.launch(slidingWindow)
         });
         return spawned;
     }

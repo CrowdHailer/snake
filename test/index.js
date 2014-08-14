@@ -7,3 +7,4 @@ require('./spec/cleave_spec');
 require('./spec/fromEvents_spec');
 require('./spec/mapStream_spec');
 require('./spec/filterStream_spec');
+require('./spec/cleaveStream_spec');
