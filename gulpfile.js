@@ -11,8 +11,8 @@ gulp.task('build', function () {
     return gulp.src('src/browser.js')
         .pipe(browserify())
         .pipe(size())
-        .pipe(uglify())
-        .pipe(size())
+        // .pipe(uglify())
+        // .pipe(size())
         .pipe(gulp.dest('./dist'))
 })
 

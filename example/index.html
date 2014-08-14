@@ -13,7 +13,6 @@
         var clicks = Stream.fromEvents('click', element);
 
         var clientX = _.map(_.dot('clientX'), clicks);
-        _.each(_.log, clientX);
         
         var clientY = _.map(_.dot('clientY'), clicks);
 
@@ -21,6 +20,13 @@
             return value < 50;
         }, clientY);
         _.each(_.log, near);
+
+        var history = _.cleave(4, clicks).head
+        console.log(history)
+        _.each(_.log, history);
+        history.forEach(function (data){
+            console.log('hello')
+        })
 
     </script>
 </body>
