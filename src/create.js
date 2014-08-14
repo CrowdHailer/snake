@@ -9,31 +9,30 @@ var each = require('./each');
 module.exports = function () {
     'use strict';
 
-    var subscribers, current, proto, NOEVENT;
+    var subscribers, current, NOEVENT;
     NOEVENT = {};
     current = NOEVENT;
-    proto = {};
     subscribers = [];
 
 
     return {
         launch: function (item) {
-            current = item
-            each(function(subscriber) {
-                subscriber(current)
-            }, subscribers)
+            current = item;
+            each(function (subscriber) {
+                subscriber(current);
+            }, subscribers);
         },
         forEach: function (subscriber) {
-            subscribers.push(subscriber)
+            subscribers.push(subscriber);
             if (current !== NOEVENT) {
-                subscriber(current)
+                subscriber(current);
             }
             return function () {
                 var index = subscribers.indexOf(subscriber);
                 if (index > -1) {
                     subscribers.splice(index, 1);
                 }
-            }
+            };
         }
     };
-}
+};
