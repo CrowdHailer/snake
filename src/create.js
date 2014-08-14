@@ -6,32 +6,34 @@
 
 var each = require('./each');
 
+var proto = {
+    map: function (transfiguration) {
+        var spawned = create();
+        this.forEach(function (data) {
+            spawned.launch(transfiguration(data));
+        });
+        return spawned;
+    },
+    filter: function (predicate) {
+        var spawned = create();
+        this.forEach(function (data) {
+            if (predicate(data)) {
+                spawned.launch(data)
+            }
+        });
+        return spawned;
+    }
+};
+
 var create = function () {
     'use strict';
 
-    var subscribers, current, proto, NOEVENT, instance;
+    var subscribers, current, NOEVENT, instance;
     NOEVENT = {};
     current = NOEVENT;
     subscribers = [];
 
-    proto = {
-        map: function (transfiguration) {
-            var spawned = create();
-            this.forEach(function (data) {
-                spawned.launch(transfiguration(data));
-            });
-            return spawned;
-        },
-        filter: function (predicate) {
-            var spawned = create();
-            this.forEach(function (data) {
-                if (predicate(data)) {
-                    spawned.launch(data)
-                }
-            });
-            return spawned;
-        }
-    };
+
 
     instance = Object.create(proto);
     instance.launch = function (item) {
