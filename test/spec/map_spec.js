@@ -35,4 +35,18 @@ describe('Map', function () {
             expect(dummy.calls.allArgs()).toEqual([[4, 'x', obj], [2, 'y', obj]]);
         });
     });
+
+    describe('for Strings', function () {
+        it('should map all charachters to a new string', function () {
+            var str = 'ab';
+            result = map(dummy, str);
+            expect(result).toEqual('11')
+        });
+
+        it('should call the operation with every charachter and location in a string', function () {
+            var str = 'ab';
+            map(dummy, str);
+            expect(dummy.calls.allArgs()).toEqual([['a', 0, str], ['b', 1, str]]);
+        });
+    });
 });
