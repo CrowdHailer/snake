@@ -56,5 +56,29 @@ describe('Map', function () {
             result = map(dummy)(array);
             expect(result).toEqual([1, 1]);
         });
+
+        it('should maintain context when calling an array', function () {
+            var obj = {};
+            map.call(obj, dummy, [4, 2]);
+            expect(dummy.calls.mostRecent().object).toBe(obj);
+        });
+
+        it('should maintain context when calling an object', function () {
+            var obj = {};
+            map.call(obj, dummy, {x: 1});
+            expect(dummy.calls.mostRecent().object).toBe(obj);
+        });
+
+        it('should maintain context when calling string', function () {
+            var obj = {};
+            map.call(obj, dummy, 'ab');
+            expect(dummy.calls.mostRecent().object).toBe(obj);
+        });
+
+        it('should maintain context when calling an array, curried', function () {
+            var obj = {};
+            map(dummy).call(obj, [4, 2]);
+            expect(dummy.calls.mostRecent().object).toBe(obj);
+        });
     });
 });
