@@ -15,18 +15,18 @@ describe('Filtering Stream', function () {
     describe('creation by method', function () {
         it('should filter events passing through a stream', function () {
             var stream2 = stream1.filter(positive);
-            stream2.forEach(dummy)
+            stream2.forEach(dummy);
             stream1.launch(1);
             stream1.launch(-1);
             expect(dummy).toHaveBeenCalledWith(1);
             expect(dummy).not.toHaveBeenCalledWith(-1);
-        })
+        });
     });
 
     describe('creation by function', function () {
         it('should filter events passing the predicate', function () {
             var stream2 = filter(positive, stream1);
-            stream2.forEach(dummy)
+            stream2.forEach(dummy);
             stream1.launch(1);
             stream1.launch(-1);
             expect(dummy).toHaveBeenCalledWith(1);

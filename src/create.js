@@ -3,10 +3,12 @@
 // TODO Add function only once
 // TODO kill method to remove events and embeded listeners
 // TODO pause method to stop events emitting
+'use strict';
+var each, proto, create;
 
-var each = require('./each');
+each = require('./each');
 
-var proto = {
+proto = {
     map: function (transfiguration) {
         var spawned = create();
         this.forEach(function (data) {
@@ -18,22 +20,19 @@ var proto = {
         var spawned = create();
         this.forEach(function (data) {
             if (predicate(data)) {
-                spawned.launch(data)
+                spawned.launch(data);
             }
         });
         return spawned;
     }
 };
 
-var create = function () {
-    'use strict';
-
+create = function () {
     var subscribers, current, NOEVENT, instance;
+
     NOEVENT = {};
     current = NOEVENT;
     subscribers = [];
-
-
 
     instance = Object.create(proto);
     instance.launch = function (item) {
