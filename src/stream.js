@@ -1,6 +1,8 @@
 // TODO ability to return stream to no event state
 // TODO timeout for events in stream
 // TODO Add function only once
+// TODO kill method to remove events and embeded listeners
+// TODO pause method to stop events emitting
 
 var each = require('./each');
 
