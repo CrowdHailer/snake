@@ -1,4 +1,4 @@
-Object.prototype.forEach = function (action) {
+Object.prototype.forEach = function (action, context) {
     var obj = this;
     for (key in obj) {
         if (obj.hasOwnProperty(key)) {
@@ -6,17 +6,17 @@ Object.prototype.forEach = function (action) {
                 key = parseInt(key)
             }
             item = obj[key];
-            action.call(this, item, key, obj)
+            action.call(context, item, key, obj)
         }
     }
 }
 
 module.exports = function (action, collection) {
     if (arguments.length === 2) {
-        collection.forEach(action)
+        collection.forEach(action, this)
     } else {
         return function (collection) {
-            collection.forEach(action)
+            collection.forEach(action, this)
         }
     }
 };

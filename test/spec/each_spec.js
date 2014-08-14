@@ -48,11 +48,29 @@ describe('Each', function () {
         })
     })
 
-    describe('curried', function () {
+    describe('General features', function () {
         it('should take arguments in a curried fashion', function () {
             var array = [4, 2]
             each(dummy)(array);
             expect(dummy.calls.allArgs()).toEqual([[4, 0, array], [2, 1, array]]);
         })
+
+        it('should maintain context when calling an array', function () {
+            var obj = {};
+            each.call(obj, dummy, [4, 2]);
+            expect(dummy.calls.mostRecent().object).toBe(obj);
+        });
+
+        it('should maintain context when calling string', function () {
+            var obj = {};
+            each.call(obj, dummy, 'ab');
+            expect(dummy.calls.mostRecent().object).toBe(obj);
+        });
+
+        it('should maintain context when calling an array, curried', function () {
+            var obj = {};
+            each(dummy).call(obj, [4, 2]);
+            expect(dummy.calls.mostRecent().object).toBe(obj);
+        });
     });
 });
