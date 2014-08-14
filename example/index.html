@@ -9,12 +9,11 @@
 
     <script src="../dist/browser.js"></script>
     <script>
-        var $ = document.querySelector.bind(document)
+        var log = console.log.bind(console);
+        var $ = document.querySelector.bind(document);
 
-        var clicks = Stream.fromEvents('click', $('#button'))
-        _.each(function (d) {
-            console.log(d);
-        }, clicks);
+        var clicks = Stream.fromEvents('click', $('#button'));
+        _.each(log, clicks);
 
     </script>
 </body>
