@@ -27,20 +27,20 @@ proto = {
         return spawned;
     },
     take: function (capacity) {
-        var spawned = create();
-        var slidingWindow = [];
+        var spawned = create(),
+            slidingWindow = [];
         this.forEach(function (data) {
             slidingWindow.push(data);
             if (slidingWindow.length > capacity) {
                 slidingWindow.shift();
             }
-            spawned.launch(slidingWindow)
+            spawned.launch(slidingWindow);
         });
         return spawned;
     },
     tail: function (capacity) {
-        var spawned = create();
-        var buffer = [];
+        var spawned = create(),
+            buffer = [];
         this.forEach(function (data) {
             buffer.push(data);
             if (buffer.length > capacity) {
