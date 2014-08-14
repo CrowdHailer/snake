@@ -16,9 +16,8 @@ Object.prototype.forEach = function (action, context) {
 module.exports = function (action, collection) {
     if (arguments.length === 2) {
         return collection.forEach(action, this);
-    } else {
-        return function (collection) {
-            return collection.forEach(action, this);
-        };
     }
+    return function (collection) {
+        return collection.forEach(action, this);
+    };
 };

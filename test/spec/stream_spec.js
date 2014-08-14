@@ -14,7 +14,7 @@ describe('Stream', function () {
 
         beforeEach(function () {
             stream = Stream.create();
-            pebble = {}
+            pebble = {};
         });
 
         it('should pass events to a subscriber', function () {
