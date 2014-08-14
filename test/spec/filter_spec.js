@@ -35,4 +35,13 @@ describe('Filter', function () {
             expect(dummy.calls.allArgs()).toEqual([[-1, 'x', obj], [1, 'y', obj]]);
         });
     });
+
+    // TODO strings
+
+    describe('General features', function () {
+        it('should take arguments curried', function () {
+            var array = [-1, 1];
+            expect(filter(positive)(array)).toEqual([1])
+        });
+    });
 });
