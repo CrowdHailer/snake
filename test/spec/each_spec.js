@@ -15,5 +15,10 @@ describe('Each', function () {
             each(dummy, array);
             expect(dummy.calls.allArgs()).toEqual([[4, 0, array], [2, 1, array]]);
         });
+
+        it('should not call the operation for an empty array', function () {
+            each(dummy, []);
+            expect(dummy).not.toHaveBeenCalled();
+        });
     });
 });
