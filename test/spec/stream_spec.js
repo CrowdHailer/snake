@@ -1,14 +1,15 @@
 'use strict';
 
 describe('Stream', function () {
-    var Stream, dummy;
+    var Stream, dummy, each;
 
     beforeEach(function () {
         Stream = require('../../src/stream');
+        each = require('../../src/each');
         dummy = jasmine.createSpy();
     });
 
-    describe('creating an empty stream', function () {
+    describe('creating a raw stream', function () {
         var stream, pebble;
 
         beforeEach(function () {
@@ -35,6 +36,19 @@ describe('Stream', function () {
 
         it('should return an unsubscribe function', function () {
             var remove = stream.forEach(dummy);
+            remove();
+            stream.launch(pebble);
+            expect(dummy).not.toHaveBeenCalled();
+        });
+
+        it('should be able to subscribe with functional each', function () {
+            each(dummy, stream);
+            stream.launch(pebble);
+            expect(dummy).toHaveBeenCalledWith(pebble);
+        });
+
+        it('should return an unsubscribe function from functional signup', function () {
+            var remove = each(dummy, stream);
             remove();
             stream.launch(pebble);
             expect(dummy).not.toHaveBeenCalled();

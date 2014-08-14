@@ -15,10 +15,10 @@ Object.prototype.forEach = function (action, context) {
 
 module.exports = function (action, collection) {
     if (arguments.length === 2) {
-        collection.forEach(action, this);
+        return collection.forEach(action, this);
     } else {
         return function (collection) {
-            collection.forEach(action, this);
+            return collection.forEach(action, this);
         };
     }
 };
