@@ -2,6 +2,9 @@ var gulp = require('gulp');
 var browserify = require('gulp-browserify');
 var connect = require('gulp-connect');
 var merge = require('merge-stream');
+var jslint = require('gulp-jslint');
+var extend = require('xtend');
+var size = require('gulp-size');
 
 gulp.task('buildTest', function () {
     var js = gulp.src('test/index.js')
@@ -24,6 +27,29 @@ gulp.task('serve', function () {
 
 gulp.task('watch', function () {
     gulp.watch(['./test/**/*', './src/**/*'], ['buildTest']);
+});
+
+gulp.task('lint', function () {
+    var lintSettings = require('./.jslint.json');
+    var source = gulp.src(['src/*.js'])
+        .pipe(jslint(lintSettings));
+
+    var tests = gulp.src(['test/**/*.js', '!test/bower_components/**/*'])
+        .pipe(jslint(extend(lintSettings, {
+            predef: [
+                'jasmine',
+                'describe',
+                'xdescribe',
+                'beforeEach',
+                'afterEach',
+                'expect',
+                'it',
+                'xit'
+            ]
+        })));
+
+    return merge(source, tests)
+        .pipe(size());
 });
 
 gulp.task('test', ['buildTest', 'serve', 'watch']);
