@@ -38,7 +38,7 @@ gulp.task('watch', function () {
 
 gulp.task('lint', function () {
     var lintSettings = require('./.jslint.json');
-    var source = gulp.src(['src/*.js'])
+    var source = gulp.src(['src/*.js', '!src/browser.js'])
         .pipe(jslint(lintSettings));
 
     var tests = gulp.src(['test/**/*.js', '!test/bower_components/**/*'])

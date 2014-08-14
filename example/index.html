@@ -9,11 +9,12 @@
 
     <script src="../dist/browser.js"></script>
     <script>
-        var log = console.log.bind(console);
-        var $ = document.querySelector.bind(document);
-
         var clicks = Stream.fromEvents('click', $('#button'));
-        _.each(log, clicks);
+        console.log(clicks)
+        var clientX = _.map(_.dot('clientX'), clicks);
+        _.each(_.log, clientX);
+        var clientY = _.map(_.dot('clientY'), clicks);
+        _.each(_.log, clientY);
 
     </script>
 </body>

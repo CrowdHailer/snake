@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "./node_modules/.bin/gulp test",
-    "lint": "./node_modules/.bin/jshint --reporter node_modules/jshint-stylish/stylish.js src/*.js test/**/*.js gulpfile.js"
+    "lint": "./node_modules/.bin/gulp lint"
   },
   "author": "Peter Saxton",
   "license": "MIT",
@@ -18,7 +18,8 @@
     "jshint-stylish": "^0.4.0",
     "gulp-jslint": "^0.1.6",
     "xtend": "^4.0.0",
-    "gulp-size": "^1.0.0"
+    "gulp-size": "^1.0.0",
+    "cumin-dot": "^0.8.0"
   },
   "dependencies": {
     "bean": "^1.0.14"
