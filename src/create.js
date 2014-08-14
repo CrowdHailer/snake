@@ -6,33 +6,45 @@
 
 var each = require('./each');
 
-module.exports = function () {
+var create = function () {
     'use strict';
 
-    var subscribers, current, NOEVENT;
+    var subscribers, current, proto, NOEVENT;
     NOEVENT = {};
     current = NOEVENT;
     subscribers = [];
 
-
-    return {
-        launch: function (item) {
-            current = item;
-            each(function (subscriber) {
-                subscriber(current);
-            }, subscribers);
-        },
-        forEach: function (subscriber) {
-            subscribers.push(subscriber);
-            if (current !== NOEVENT) {
-                subscriber(current);
-            }
-            return function () {
-                var index = subscribers.indexOf(subscriber);
-                if (index > -1) {
-                    subscribers.splice(index, 1);
-                }
-            };
+    proto = {
+        map: function (transfiguration) {
+            var spawned = create();
+            this.forEach(function(data){
+                spawned.launch(transfiguration(data))
+            })
+            return spawned
         }
+    }
+
+    var instance = Object.create(proto);
+    instance.launch = function (item) {
+        current = item;
+        each(function (subscriber) {
+            subscriber(current);
+        }, subscribers);
     };
+    instance.forEach = function (subscriber) {
+        subscribers.push(subscriber);
+        if (current !== NOEVENT) {
+            subscriber(current);
+        }
+        return function () {
+            var index = subscribers.indexOf(subscriber);
+            if (index > -1) {
+                subscribers.splice(index, 1);
+            }
+        };
+    };
+
+    return instance;
 };
+
+module.exports = create;
