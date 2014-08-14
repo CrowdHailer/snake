@@ -21,4 +21,11 @@ describe('Each', function () {
             expect(dummy).not.toHaveBeenCalled();
         });
     });
+
+    describe('for Objects', function () {
+        it('should call the operation with every value and key in an object', function () {
+            each(dummy, {x: 4, y: 2});
+            expect(dummy.calls.allArgs()).toEqual([[4, 'x'], [2, 'y']]);
+        });
+    });
 });
