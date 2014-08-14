@@ -21,4 +21,18 @@ describe('Map', function () {
             expect(dummy.calls.allArgs()).toEqual([[4, 0, array], [2, 1, array]])
         });
     });
+
+    describe('for Objects', function () {
+        it('should map all values to a new array', function () {
+            var obj = {x: 4, y: 2};
+            result = map(dummy, obj);
+            expect(result).toEqual({x: 1, y: 1})
+        });
+
+        it('should call the operation with every value and key in an object', function () {
+            var obj = {x: 4, y: 2};
+            map(dummy, obj);
+            expect(dummy.calls.allArgs()).toEqual([[4, 'x', obj], [2, 'y', obj]]);
+        });
+    });
 });
