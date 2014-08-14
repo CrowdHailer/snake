@@ -21,5 +21,16 @@ describe('Stream', function () {
             stream.launch(pebble);
             expect(dummy).toHaveBeenCalledWith(pebble);
         });
+
+        it('should not call new subscribers without an event', function () {
+            stream.forEach(dummy);
+            expect(dummy).not.toHaveBeenCalled();
+        });
+
+        it('should call new subscribers with previous event', function () {
+            stream.launch(pebble);
+            stream.forEach(dummy);
+            expect(dummy).toHaveBeenCalledWith(pebble);
+        });
     });
 });
