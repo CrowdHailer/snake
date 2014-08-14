@@ -27,5 +27,10 @@ describe('Each', function () {
             each(dummy, {x: 4, y: 2});
             expect(dummy.calls.allArgs()).toEqual([[4, 'x'], [2, 'y']]);
         });
+
+        it('should not call the operation for an empty object', function () {
+            each(dummy, {});
+            expect(dummy).not.toHaveBeenCalled();
+        });
     });
 });
