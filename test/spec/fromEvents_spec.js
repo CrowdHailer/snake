@@ -32,4 +32,15 @@ describe('From Events', function () {
             expect(dummy).toHaveBeenCalledWith(pebble);
         });
     });
+
+    describe('curried creating', function () {
+        var stream, fromClicks;
+        it('should create curried', function () {
+            fromClicks = Stream.fromEvents('click');
+            stream = fromClicks(element);
+            each(dummy, stream);
+            bean.fire(element, 'click', pebble)
+            expect(dummy).toHaveBeenCalledWith(pebble);
+        });
+    });
 });
