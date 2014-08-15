@@ -26,22 +26,19 @@
             return {x: p1.x + p2.x, y: p1.y + p2.y}
         }
 
-        var clicks = Stream.fromEvents('keypress', document);
-        var keys = _.map(_.dot('keyCode'), clicks);
-        var vectors = _.map(VECTORS, keys)
-        var instructions = _.filter(_.I, vectors);
-        var position = _.reduce({x: 200, y: 200}, add, instructions);
-        var positions = _.cleave(7, position).head
-        positions.forEach(function(data){
-            var string = '';
-            data.forEach(function(pos) {
-                string += '<circle cx="' + pos.x + '" cy="' + pos.y + '" r="70"/>'
+        Stream.fromEvents('keypress', document)
+            .map(_.dot('keyCode'))
+            .map(VECTORS)
+            .filter(_.I)
+            .reduce(add, {x: 200, y: 200})
+            .take(7)
+            .forEach(function(data){
+                var string = '';
+                data.forEach(function(pos) {
+                    string += '<circle cx="' + pos.x + '" cy="' + pos.y + '" r="70"/>'
+                });
+                $('svg').innerHTML = string
             });
-            $('svg').innerHTML = string
-        });
-
-        _.each(_.log, positions);
-        
 
     </script>
 </body>
