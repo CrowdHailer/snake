@@ -26,19 +26,21 @@
             return {x: p1.x + p2.x, y: p1.y + p2.y}
         }
 
+        var makeCircles = function (array) {
+            var string = '';
+            array.forEach(function(pos) {
+                string += '<circle cx="' + pos.x + '" cy="' + pos.y + '" r="70"/>'
+            });
+            $('svg').innerHTML = string
+        }
+
         Stream.fromEvents('keypress', document)
             .map(_.dot('keyCode'))
             .map(VECTORS)
             .filter(_.I)
             .reduce(add, {x: 200, y: 200})
             .take(7)
-            .forEach(function(data){
-                var string = '';
-                data.forEach(function(pos) {
-                    string += '<circle cx="' + pos.x + '" cy="' + pos.y + '" r="70"/>'
-                });
-                $('svg').innerHTML = string
-            });
+            .forEach(makeCircles);
 
     </script>
 </body>
