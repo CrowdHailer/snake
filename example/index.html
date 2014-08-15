@@ -5,28 +5,45 @@
     <title>Document</title>
 </head>
 <body>
-    <div id="button" style="height:200px;width:200px;background-color:red"></div>
+    <div style="height:500px;width:1200px;background-color:red">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 6000 2500">
+            <circle cx="200" cy="200" r="50"/>
+        </svg>
+    </div>
 
     <script src="../dist/browser.js"></script>
     <script>
-        var element = $('#button');
-        var clicks = Stream.fromEvents('click', element);
+        var VECTORS = {
+            117: {x: -50, y: -86}, // u
+            105: {x: 50, y: -86}, // i
+            107: {x: 100, y: 0}, // k
+            109: {x: 50, y: 86}, // m
+            110: {x: -50, y: 86}, // n
+            104: {x: -100, y: 0}, // h
+        }
 
-        var clientX = _.map(_.dot('clientX'), clicks);
+        var clicks = Stream.fromEvents('keypress', document);
+        var keys = _.map(_.dot('keyCode'), clicks);
+        var vectors = _.map(function (keyCode) {
+            return VECTORS[keyCode];
+        }, keys)
+        var instructions = _.filter(function(data){
+            return data;
+        }, vectors);
+        var position = _.reduce({x: 200, y: 200}, function(p1, p2){
+            return {x: p1.x + p2.x, y: p1.y + p2.y}
+        }, instructions);
+        var positions = _.cleave(7, position).head
+        positions.forEach(function(data){
+            var string = '';
+            data.forEach(function(pos) {
+                string += '<circle cx="' + pos.x + '" cy="' + pos.y + '" r="50"/>'
+            });
+            $('svg').innerHTML = string
+        });
+
+        _.each(_.log, positions);
         
-        var clientY = _.map(_.dot('clientY'), clicks);
-
-        var near = _.filter(function(value){
-            return value < 50;
-        }, clientY);
-        _.each(_.log, near);
-
-        var history = _.cleave(4, clicks).head
-        console.log(history)
-        _.each(_.log, history);
-        history.forEach(function (data){
-            console.log('hello')
-        })
 
     </script>
 </body>
