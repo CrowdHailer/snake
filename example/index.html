@@ -13,31 +13,29 @@
 
     <script src="../dist/browser.js"></script>
     <script>
-        var VECTORS = {
+        var VECTORS = _.peruse({
             117: {x: -50, y: -86}, // u
             105: {x: 50, y: -86}, // i
             107: {x: 100, y: 0}, // k
             109: {x: 50, y: 86}, // m
             110: {x: -50, y: 86}, // n
             104: {x: -100, y: 0}, // h
+        })
+
+        var add = function(p1, p2){
+            return {x: p1.x + p2.x, y: p1.y + p2.y}
         }
 
         var clicks = Stream.fromEvents('keypress', document);
         var keys = _.map(_.dot('keyCode'), clicks);
-        var vectors = _.map(function (keyCode) {
-            return VECTORS[keyCode];
-        }, keys)
-        var instructions = _.filter(function(data){
-            return data;
-        }, vectors);
-        var position = _.reduce({x: 200, y: 200}, function(p1, p2){
-            return {x: p1.x + p2.x, y: p1.y + p2.y}
-        }, instructions);
+        var vectors = _.map(VECTORS, keys)
+        var instructions = _.filter(_.I, vectors);
+        var position = _.reduce({x: 200, y: 200}, add, instructions);
         var positions = _.cleave(7, position).head
         positions.forEach(function(data){
             var string = '';
             data.forEach(function(pos) {
-                string += '<circle cx="' + pos.x + '" cy="' + pos.y + '" r="50"/>'
+                string += '<circle cx="' + pos.x + '" cy="' + pos.y + '" r="70"/>'
             });
             $('svg').innerHTML = string
         });
