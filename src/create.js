@@ -49,7 +49,7 @@ proto = {
         });
         return spawned;
     },
-    reduce: function (seed, aggregator) {
+    reduce: function (aggregator, seed) {
         var spawned = create();
         var memo = seed;
         spawned.launch(seed);

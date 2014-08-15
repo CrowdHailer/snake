@@ -14,7 +14,7 @@ describe('Reducing Stream', function () {
 
     describe('Starting with initial value', function () {
         it('should add events to a running total', function () {
-            var stream2 = stream1.reduce(0, add);
+            var stream2 = stream1.reduce(add, 0);
             stream2.forEach(dummy);
             stream1.launch(1);
             dummy.calls.reset();
@@ -23,8 +23,15 @@ describe('Reducing Stream', function () {
         });
 
         it('should pass the seed value onto the spawned stream', function () {
-           var stream2 = stream1.reduce(0, add);
+            var stream2 = stream1.reduce(add, 0);
             stream2.forEach(dummy);
+            expect(dummy).toHaveBeenCalledWith(0);
+        });
+    });
+
+    describe('functional application', function () {
+        it('should accept all arguments together', function () {
+            reduce(0, add, stream1).forEach(dummy);
             expect(dummy).toHaveBeenCalledWith(0);
         });
     });

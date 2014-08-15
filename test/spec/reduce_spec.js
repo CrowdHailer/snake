@@ -10,7 +10,7 @@ describe('Reduce', function () {
         });
     });
 
-    xdescribe('for Arrays', function () {
+    describe('for Arrays', function () {
         it('should reduce an array', function () {
             var array = [4, 2];
             result = reduce(0, dummy, array);
