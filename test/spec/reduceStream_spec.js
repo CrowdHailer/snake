@@ -21,5 +21,11 @@ describe('Reducing Stream', function () {
             stream1.launch(2);
             expect(dummy).toHaveBeenCalledWith(3);
         });
+
+        it('should pass the seed value onto the spawned stream', function () {
+           var stream2 = stream1.reduce(0, add);
+            stream2.forEach(dummy);
+            expect(dummy).toHaveBeenCalledWith(0);
+        });
     });
 });

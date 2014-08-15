@@ -52,6 +52,7 @@ proto = {
     reduce: function (seed, aggregator) {
         var spawned = create();
         var memo = seed;
+        spawned.launch(seed);
         this.forEach(function (data) {
             memo = aggregator(memo, data);
             spawned.launch(memo)
