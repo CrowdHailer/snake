@@ -48,6 +48,15 @@ proto = {
             }
         });
         return spawned;
+    },
+    reduce: function (seed, aggregator) {
+        var spawned = create();
+        var memo = seed;
+        this.forEach(function (data) {
+            memo = aggregator(memo, data);
+            spawned.launch(memo)
+        });
+        return spawned;
     }
 };
 
