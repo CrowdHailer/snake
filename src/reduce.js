@@ -3,5 +3,5 @@
 'use strict';
 
 module.exports = function (seed, aggregator, collection) {
-    return collection.reduce(aggregator, seed)
-}
+    return collection.reduce(aggregator, seed);
+};
